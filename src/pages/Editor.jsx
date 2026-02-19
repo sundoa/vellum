@@ -1,11 +1,13 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CustomContextMenu from "../components/CustomContextMenu";
 import Navbar from "../components/Navbar";
+import { AppContext } from "../context/AppContext";
 
 export default function Editor() {
   const [menu, setMenu] = useState(null);
+  const { activeFolder } = useContext(AppContext);
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -16,7 +18,7 @@ export default function Editor() {
     const blob = new Blob([editor.getText()], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "vellum-document.txt";
+    link.download = `${activeFolder?.name || "vellum-document"}.txt`;
     link.click();
   };
 
@@ -44,4 +46,3 @@ export default function Editor() {
     </>
   );
 }
-
