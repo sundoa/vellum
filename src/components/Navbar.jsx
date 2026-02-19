@@ -1,14 +1,16 @@
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+
 export default function Navbar({ downloadFile }) {
-  const user = localStorage.getItem("vellumUser");
+  const { user } = useContext(AppContext);
 
   return (
     <div className="navbar">
       <div>Vellum</div>
       <div>
-        <span>{user}</span>
-        <button onClick={downloadFile}>Download</button>
+        <span>{user?.username || user?.email}</span>
+        {downloadFile && <button onClick={downloadFile}>Download</button>}
       </div>
     </div>
   );
 }
-
