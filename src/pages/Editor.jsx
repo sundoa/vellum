@@ -3,6 +3,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { useState, useContext } from "react";
 import CustomContextMenu from "../components/CustomContextMenu";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import { AppContext } from "../context/AppContext";
 
 export default function Editor() {
@@ -22,26 +23,33 @@ export default function Editor() {
     link.click();
   };
 
+  const handleFolderSelect = (folder) => {
+    // Optional: Switch active folder while editing
+  };
+
   return (
     <>
       <Navbar downloadFile={downloadFile} />
-      <div
-        className="editor-wrapper"
-        onContextMenu={(e) => {
-          e.preventDefault();
-          setMenu({ x: e.pageX, y: e.pageY });
-        }}
-      >
-        <EditorContent editor={editor} className="editor" />
+      <div className="editor-page fade">
+        <Sidebar onSelectFolder={handleFolderSelect} />
+        <div
+          className="editor-wrapper"
+          onContextMenu={(e) => {
+            e.preventDefault();
+            setMenu({ x: e.pageX, y: e.pageY });
+          }}
+        >
+          <EditorContent editor={editor} className="editor" />
 
-        {menu && (
-          <CustomContextMenu
-            x={menu.x}
-            y={menu.y}
-            close={() => setMenu(null)}
-            editor={editor}
-          />
-        )}
+          {menu && (
+            <CustomContextMenu
+              x={menu.x}
+              y={menu.y}
+              close={() => setMenu(null)}
+              editor={editor}
+            />
+          )}
+        </div>
       </div>
     </>
   );
