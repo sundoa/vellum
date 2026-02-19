@@ -1,39 +1,14 @@
+/* -------------------------
+   Global Styles
+------------------------- */
 body {
   margin: 0;
   font-family: Inter, sans-serif;
   background: #f5f5f5;
+  color: #111;
 }
 
-.auth-container,
-.dashboard,
-.editor-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  animation: fadeIn 0.4s ease;
-}
-
-.auth-container input,
-.folder-create input {
-  padding: 10px;
-  width: 250px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  transition: all 0.2s ease;
-}
-
-.auth-container input:focus,
-.folder-create input:focus {
-  border-color: black;
-}
-
-.auth-container button,
 button {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  background: black;
-  color: white;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -42,69 +17,11 @@ button:hover {
   transform: scale(1.05);
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 40px;
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.editor-wrapper {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 40px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.editor {
-  min-height: 400px;
-  outline: none;
-  border: none;
-}
-
-.ProseMirror {
-  outline: none !important;
-  border: none !important;
-}
-
-.context-menu {
-  position: absolute;
-  background: white;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-.context-menu div {
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.context-menu div:hover {
-  background: #eee;
-}
-
-.folder-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
-}
-
-.folder-card {
-  padding: 20px;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.folder-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+/* -------------------------
+   Animations
+------------------------- */
+.fade {
+  animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
@@ -116,7 +33,126 @@ button:hover {
     opacity: 1;
     transform: translateY(0);
   }
-  /* Dashboard & Editor Layout with Sidebar */
+}
+
+/* -------------------------
+   Auth Pages (Login/Signup)
+------------------------- */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 350px;
+  margin: 80px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.auth-container input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.auth-container input:focus {
+  border-color: black;
+}
+
+.auth-container button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: black;
+  color: white;
+}
+
+.auth-container p {
+  cursor: pointer;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.auth-container p:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------
+   Navbar
+------------------------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  align-items: center;
+}
+
+.navbar button {
+  background: black;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+/* -------------------------
+   Sidebar
+------------------------- */
+.sidebar {
+  width: 220px;
+  padding: 20px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  height: calc(100vh - 72px); /* subtract navbar height */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar h3 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.folder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.folder-item.active {
+  background: #f0f0f0;
+}
+
+.folder-item:hover {
+  background: #f9f9f9;
+}
+
+.folder-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 0.9rem;
+}
+
+.folder-actions button:hover {
+  transform: scale(1.2);
+}
+
+/* -------------------------
+   Dashboard Layout
+------------------------- */
 .dashboard,
 .editor-page {
   display: flex;
@@ -131,7 +167,29 @@ button:hover {
   gap: 20px;
 }
 
-/* Reuse existing folder grid styling */
+/* Folder creation input/button */
+.folder-create {
+  display: flex;
+  gap: 10px;
+}
+
+.folder-create input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  flex: 1;
+  outline: none;
+}
+
+.folder-create button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: black;
+  color: white;
+}
+
+/* Folder grid */
 .folder-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -142,22 +200,128 @@ button:hover {
   padding: 20px;
   background: white;
   border-radius: 14px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .folder-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* Sidebar already styled in previous CSS snippet */
-
-/* Editor wrapper to expand in remaining space */
+/* -------------------------
+   Editor
+------------------------- */
 .editor-wrapper {
   flex: 1;
   min-height: 500px;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
+.editor {
+  min-height: 400px;
+  outline: none;
+  border: none;
+}
+
+/* TipTap editor clean styles */
+.ProseMirror {
+  outline: none !important;
+  border: none !important;
+}
+
+/* -------------------------
+   Custom Context Menu
+------------------------- */
+.context-menu {
+  position: absolute;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.context-menu div {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.context-menu div:hover {
+  background: #eee;
+}
+
+/* -------------------------
+   Modal
+------------------------- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.2s ease;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 300px;
+}
+
+.modal input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.modal button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+
+.modal button:hover {
+  transform: scale(1.05);
+}
+
+.modal .close {
+  background: #ccc;
+  color: black;
+}
+
+/* -------------------------
+   Responsive
+------------------------- */
+@media (max-width: 900px) {
+  .dashboard,
+  .editor-page {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+  }
 }
