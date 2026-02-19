@@ -116,4 +116,48 @@ button:hover {
     opacity: 1;
     transform: translateY(0);
   }
+  /* Dashboard & Editor Layout with Sidebar */
+.dashboard,
+.editor-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px 40px;
+}
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Reuse existing folder grid styling */
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.folder-card {
+  padding: 20px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.folder-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Sidebar already styled in previous CSS snippet */
+
+/* Editor wrapper to expand in remaining space */
+.editor-wrapper {
+  flex: 1;
+  min-height: 500px;
+}
+
 }
