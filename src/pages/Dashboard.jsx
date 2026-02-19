@@ -3,22 +3,30 @@ import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function Dashboard() {
-  const { folders, setFolders, setActiveFolder } = useContext(AppContext);
-  const [newFolder, setNewFolder] = useState("");
+  const { user, folders } = useContext(AppContext);
   const navigate = useNavigate();
+  const [newFolder, setNewFolder] = useState("");
 
-  const createFolder = () => {
-    if (newFolder) {
-      setFolders([...folders, { name: newFolder, docs: [] }]);
+  const createFolder = async () => {
+    if (!newFolder || !user) return;
+    try {
+      await addDoc(collection(db, "users", user.uid, "folders"), {
+        name: newFolder,
+        docs: [],
+        createdAt: new Date(),
+      });
       setNewFolder("");
+    } catch (err) {
+      console.error("Error creating folder:", err);
     }
   };
 
   const handleFolderSelect = (folder) => {
-    setActiveFolder(folder);
-    navigate("/editor");
+    navigate("/editor", { state: { folder } });
   };
 
   return (
@@ -38,9 +46,9 @@ export default function Dashboard() {
           </div>
 
           <div className="folder-grid">
-            {folders.map((folder, i) => (
+            {folders.map((folder) => (
               <div
-                key={i}
+                key={folder.id}
                 className="folder-card"
                 onClick={() => handleFolderSelect(folder)}
               >
