@@ -20,4 +20,3 @@ export default function CustomContextMenu({ x, y, close, editor }) {
     </div>
   );
 }
-
